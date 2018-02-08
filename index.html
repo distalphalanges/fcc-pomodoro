@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pomodoro timer</title>
+	<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+		<div id="notifications">
+			<div class="notify task hidden">
+				<strong>Task completed.</strong>
+				<p>Good job.</p>
+			</div>
+			<div class="notify break hidden">
+				<strong>Break's over!</strong>
+				<p>Let's do it!</p>
+			</div>
+			<div class="notify session hidden">
+				<strong>Session completed.</strong>
+				<p>You've been working for a while! Give yourself a lengthy break - you've earned it.</p>
+			</div>
+			<div class="notify again hidden">
+				<strong>Begin another session?</strong>
+			</div>
+		</div>
+		<div id="toggle">
+			<button id="toggleTask" class="mode active">Task</button>
+			<button id="toggleBreak" class="mode">Break</button>
+			<div id="tasks-completed">
+				<input type="text" id="tasksCompleted" readonly>
+			</div>		
+			<div id="current-rhythm">
+				<input type="text" id="currentRhythm" readonly>
+				<a href="#" id="showSettings">(settings)</a>
+			</div>
+		</div>
+		<div id="timer">
+			<input type="text" id="timeLeft">
+		</div>
+		<div id="control">
+			<button id="start">Start</button>
+			<button id="pause">Pause</button>
+			<button id="reset">Reset</button>
+		</div>
+		<div id="settings" class="hidden">
+			<div id="select-rhythm">
+				<select id="selectRhythm">
+					<option>Pomodoro</option>
+					<option>DeskTime</option>
+					<option>Ultradian</option>
+					<option disabled>(custom)</option>
+				</select>
+				<a href="#" id="hideSettings">(close) </a>
+			</div>
+			<div class="adjust">
+				<label>Task length:</label>
+				<div class="input">
+					<input type="text" id="taskLength">
+				</div>
+				<div class="buttons">
+					<button id="increaseTask">+</button>
+					<button id="decreaseTask">-</button>
+				</div>
+			</div>
+			<div class="adjust">
+				<label>Break length:</label>
+				<div class="input">
+					<input type="text" id="breakLength">
+				</div>
+				<div class="buttons">
+					<button id="increaseBreak">+</button>
+					<button id="decreaseBreak">-</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<audio id="ding" src="ding.mp3"></audio>
+	<!-- ‘ding.wav’ by Corsica_S available at https://freesound.org/people/Corsica_S/sounds/91926/ under a Creative Commons Attribution 3.0. Full terms at https://creativecommons.org/licenses/by/3.0/ -->
+	<script src="timer.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>
