@@ -57,13 +57,13 @@ var app = {
 	},
 
 	next: function() {
-
 		this.running = false;
 		switch(modes[this.mode]) {
 
 			case 'task':
 				// task completed
 				this.completed++;
+				view.notify('task');
 				if(this.completed === this.tasksPerSession) {
 					// give yourself a lengthy break
 					this.mode = 2;
@@ -76,7 +76,6 @@ var app = {
 			case 'break':
 				// back to work!
 				this.mode = +!this.mode;
-				view.notify(modes[this.mode])
 				this.currentTimer = new Timer(modes[this.mode], this[modes[this.mode]]);
 				this.start();
 				break;
@@ -89,6 +88,7 @@ var app = {
 	},
 
 	toggle: function(m) {
+		document.getElementById('ding').play();
 		var buttons = document.querySelectorAll('.mode');
 		if(m != modes[this.mode]) {
 			if(this.mode < 2) {
@@ -130,15 +130,9 @@ var view = {
 	},
 
 	notify: function(mode) {
-		document.getElementById('ding').play();
 		switch(mode) {
 			case 'task':
-				hide(document.querySelector('.break'));
 				fadeIn(document.querySelector('.task'));
-				break;
-			case 'break':
-				hide(document.querySelector('.task'));
-				fadeIn(document.querySelector('.break'));
 				break;
 			case 'long':
 				hide(document.querySelector('.task'));
