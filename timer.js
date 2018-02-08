@@ -29,7 +29,7 @@ Timer.prototype.startTimer = function(repeat, finish) {
 				self.tick();
 				repeat();
 			}
-		}, 100);
+		}, 1000);
 	}
 }
 
