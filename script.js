@@ -11,13 +11,13 @@ var app = {
 // handles all the application logic,
 // doesn't touch the DOM
 
-	init: function(rhythm, taskLength, breakLength, longBreakLength, tasksPerSession) {
+	init: function(rhythm, taskLength, breakLength, longBreakLength, numTasks) {
 
-		this.rhythm = rhythm;
-		this.task = taskLength * 60;
-		this.break = breakLength * 60;
-		this.long = longBreakLength * 60;
-		this.tasksPerSession = tasksPerSession;
+		this.rhythm = rhythm || this.rhythm;
+		this.task = taskLength * 60 || this.task;
+		this.break = breakLength * 60 || this.break;
+		this.long = longBreakLength * 60 || this.long;
+		this.numTasks = numTasks || 3;
 		this.currentTimer = new Timer('task', this.task);
 		this.timeLeft = this.task;
 		this.completed = 0;
@@ -25,14 +25,15 @@ var app = {
 		this.running = false;
 
 		view.render();
-		view.bind();
 
 	},
 
 	adjust: function(param, value) {
-		this.rhythm = '(custom)';
-		this[param] = value;
-		view.render();
+		if(!(this[param] === 0 && value < 0)) {
+			this.rhythm = '(custom)';
+			this[param] += value;
+			view.render();
+		}
 	},
 
 	reset: function() {
@@ -57,38 +58,32 @@ var app = {
 	},
 
 	next: function() {
+		ding();
 		this.running = false;
 		switch(modes[this.mode]) {
 
 			case 'task':
-				// task completed
 				this.completed++;
-				view.notify('task');
-				if(this.completed === this.tasksPerSession) {
-					// give yourself a lengthy break
+				if(this.completed === this.numTasks) {
+					show(document.getElementById('complete'));
 					this.mode = 2;
-					view.notify('long');
 					this.currentTimer = new Timer('long', this.long);
 					this.start();
 					break;
 				}
 
 			case 'break':
-				// back to work!
 				this.mode = +!this.mode;
 				this.currentTimer = new Timer(modes[this.mode], this[modes[this.mode]]);
 				this.start();
 				break;
 
-			case 'long':
-				// begin another session?
-				break;
 		}
 
 	},
 
 	toggle: function(m) {
-		document.getElementById('ding').play();
+		ding();
 		var buttons = document.querySelectorAll('.mode');
 		if(m != modes[this.mode]) {
 			if(this.mode < 2) {
@@ -98,7 +93,7 @@ var app = {
 				buttons[+!this.mode].classList.add('active');
 				this.next();
 			} else {
-				view.notify('again');
+				show(document.getElementById('complete'));
 			}
 		}
 	},
@@ -116,6 +111,7 @@ var view = {
 
 		var fields = [ 
 			{ id: 'timeLeft', data: convert(app.timeLeft) },
+			{ id: 'numTasks', data: app.numTasks },
 			{ id: 'taskLength', data: convert(app.task) },
 			{ id: 'breakLength', data: convert(app.break) },
 			{ id: 'tasksCompleted', data: app.completed + ' task(s) completed'},
@@ -129,23 +125,6 @@ var view = {
 
 	},
 
-	notify: function(mode) {
-		switch(mode) {
-			case 'task':
-				fadeIn(document.querySelector('.task'));
-				break;
-			case 'long':
-				hide(document.querySelector('.task'));
-				fadeIn(document.querySelector('.session'));
-				break;
-			case 'again':
-				hide(document.querySelector('.session'));
-				fadeIn(document.querySelector('.again'));
-				break;
-		}
-
-	},
-
 	bind: function(controls) {
 
 		var handlers = {
@@ -155,17 +134,23 @@ var view = {
 			apply: app.reset.bind(app),
 			toggleTask: app.toggle.bind(app, 'task'),
 			toggleBreak	: app.toggle.bind(app, 'break'),
+			decreaseNumTasks: function() {
+				app.adjust('numTasks', -1);
+			},
+			increaseNumTasks: function() {
+				app.adjust('numTasks', 1);
+			},
 			decreaseTask: function() {
-				app.adjust('task', app.task-60);
+				app.adjust('task', -60);
 			},
 			increaseTask: function() {
-				app.adjust('task', app.task+60);
+				app.adjust('task', 60);
 			},
 			decreaseBreak: function() {
-				app.adjust('break', app.break-60);
+				app.adjust('break', -60);
 			},
 			increaseBreak: function() {
-				app.adjust('break', app.break+60);
+				app.adjust('break', 60);
 			},
 			showSettings: function() { 
 				show(document.getElementById('settings'));
@@ -174,15 +159,22 @@ var view = {
 			hideSettings: function() {
 				hide(document.getElementById('settings'));
 				view.render();
+			},
+			again: function() {
+				hide(document.getElementById('complete'));
+				app.init();
+				app.start();
 			}
 		}
 
 		var controls =[
 			'start', 'pause', 'reset',
 			'toggleTask', 'toggleBreak',
+			'increaseNumTasks','decreaseNumTasks',
 			'decreaseTask', 'increaseTask',	
-			'decreaseBreak', 'increaseBreak', 
-			'showSettings', 'hideSettings' ];
+			'decreaseBreak', 'increaseBreak',
+			'showSettings', 'hideSettings',
+			'apply', 'again'];
 
 		controls.forEach(function(control) {
 			document.getElementById(control)
@@ -199,6 +191,7 @@ var view = {
 
 };
 
+view.bind();
 app.init.apply(app, rhythms['Pomodoro']);
 
 function hide(element) {
@@ -207,6 +200,10 @@ function hide(element) {
 
 function show(element) {
 	element.classList.remove('hidden');
+}
+
+function ding() {
+	document.getElementById('ding').play();
 }
 
 function fadeOut(element) {

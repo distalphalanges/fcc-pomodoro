@@ -6,18 +6,10 @@
 </head>
 <body>
 	<div id="container">
-		<div id="notifications">
-			<div class="notify task hidden">
-				<strong>Task completed.</strong>
-				<p>Good job.</p>
-			</div>
-			<div class="notify session hidden">
-				<strong>Session completed.</strong>
-				<p>You've been working for a while! Give yourself a lengthy break - you've earned it.</p>
-			</div>
-			<div class="notify again hidden">
-				<strong>Begin another session?</strong>
-			</div>
+		<div id="complete" class="hidden">
+			<h2>Session complete.</h2>
+			<p>You've been working for a while. You should probably take a break.</p>
+			<button id="again" class="wide">No thanks.</button>
 		</div>
 		<div id="toggle">
 			<button id="toggleTask" class="mode active">Task</button>
@@ -48,7 +40,17 @@
 				</select>
 				<a href="#" id="hideSettings">(close) </a>
 			</div>
-			<div class="adjust">
+			<div class="adjust task">
+				<label>Tasks:</label>
+				<div class="input">
+					<input type="text" id="numTasks" placeholder="&#x221e;">
+				</div>
+				<div class="buttons">
+					<button id="increaseNumTasks">+</button>
+					<button id="decreaseNumTasks">-</button>
+				</div>
+			</div>
+			<div class="adjust length">
 				<label>Task length:</label>
 				<div class="input">
 					<input type="text" id="taskLength">
@@ -58,7 +60,7 @@
 					<button id="decreaseTask">-</button>
 				</div>
 			</div>
-			<div class="adjust">
+			<div class="adjust length">
 				<label>Break length:</label>
 				<div class="input">
 					<input type="text" id="breakLength">
@@ -68,7 +70,7 @@
 					<button id="decreaseBreak">-</button>
 				</div>
 			</div>
-			<button>Apply</button>
+			<button id="apply" class="wide">Apply</button>
 		</div>
 	</div>
 	<audio id="ding" src="ding.mp3"></audio>

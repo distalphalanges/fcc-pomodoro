@@ -1,26 +1,24 @@
-html {
+*, *:before, *:after {
     box-sizing: border-box;
 }
 
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-
-body, div, h1, h2, h3, h4, h5, h6, p, ol, ul {
-    margin: 0;
-    padding: 0;
+body {
     font-family: sans-serif;
     font-size: 16px;
-    font-weight: normal;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 6px 0;
 }
 
 a {
     color: #888;
     font-size: 12px;
-}
-
-p {
-    font-size: 13px;
 }
 
 button {
@@ -34,8 +32,21 @@ button {
 
 #timer, #toggle, #control, #settings {
     width: 380px;
-    margin: 1px auto 2px auto;
+    margin: 2px auto 2px auto;
     text-align: center;
+}
+
+#complete {
+    width: 380px;
+    margin: 0 auto;
+}
+
+.wide {
+    display: block;
+    width: 100%;
+    padding: 6px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 #toggle button {
@@ -65,26 +76,6 @@ button {
     text-align: center;
 }
 
-#start {
-    background-color: #5da423;
-    border: 1px solid #396516;
-}
-
-#start:hover {
-    background-color: #4f8b1d;
-}
-
-#pause {
-    background-color: #c60f13;
-    border: 1px solid #7f0a0c;
-}
-
-#reset {
-    background-color: #e9e9e9;
-    color: #1d1d1d;
-    border: 1px solid #c3c3c3;
-}
-
 #control button {
     width: 120px;
     padding: 12px;
@@ -98,6 +89,34 @@ button {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset;
 }
 
+#start {
+    background-color: #5da423;
+    border: 1px solid #396516;
+}
+
+#start:hover {
+    background-color: #4e9315;
+}
+
+#pause {
+    background-color: #c60f13;
+    border: 1px solid #7f0a0c;
+}
+
+#pause:hover {
+    background-color: #b80a0d;
+}
+
+#reset {
+    background-color: #e9e9e9;
+    color: #1d1d1d;
+    border: 1px solid #c3c3c3;
+}
+
+#reset:hover {
+    background-color: #ddd;
+}
+
 .active {
     border: 1px solid #aaa;
     padding: 2px;
@@ -106,14 +125,11 @@ button {
     background-image: linear-gradient(to top, #f7f7f7, #d1d1d1);
 }
 
-
 #select-rhythm select {
-    width: 75%;
+    width: 88%;
 }
 
-
 .adjust {
-    width: fit-content;
     padding: 4px;
     margin: 6px auto;
     display: inline-block;
@@ -121,9 +137,25 @@ button {
     color: #444;
 }
 
+.length {
+    width: 36%;
+}
+
+.task {
+    width: 23%;
+}
+
 .input, .buttons {
     display: inline-block;
     vertical-align: middle;
+}
+
+.input {
+    width: 70%;
+}
+
+.buttons {
+    width: 24%;
 }
 
 .adjust label {
@@ -133,7 +165,7 @@ button {
 }
 
 .adjust input {
-    width: 100px;
+    width: 100%;
     height: 60px;
     font-size: 30px;
     text-align: center;
@@ -142,27 +174,10 @@ button {
 .adjust button {
     width: 100%;
     height: 30px;
+    padding: 0;
     font-size: 16px;
 }
 
 .hidden {
     display: none;
-}
-
-.notify {
-    width: 380px;
-    padding: 5px 10px;
-    margin: 2px auto;
-}
-
-.task {
-    background: #a8f0a8;
-    border-top: 1.5px solid #00bb00;
-    color: #1b981b;
-}
-
-.break {
-    background-color: #8C8CBF;
-    border-top: 1.5px solid #2727A0;
-    color: #2727A0;
 }
