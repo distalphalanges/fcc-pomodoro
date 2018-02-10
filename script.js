@@ -20,7 +20,7 @@ var app = {
 		this.numTasks = numTasks || 3;
 		this.currentTimer = new Timer('task', this.task);
 		this.timeLeft = this.task;
-		this.completed = 0;
+		this.completed = this.completed || 0;
 		this.mode = 0;
 		this.running = false;
 
@@ -64,7 +64,7 @@ var app = {
 
 			case 'task':
 				this.completed++;
-				if(this.completed === this.numTasks) {
+				if(this.completed === this.numTasks && this.numTasks >= 2) {
 					show(document.getElementById('complete'));
 					this.mode = 2;
 					this.currentTimer = new Timer('long', this.long);
@@ -160,8 +160,9 @@ var view = {
 				hide(document.getElementById('settings'));
 				view.render();
 			},
-			again: function() {
+			continue: function() {
 				hide(document.getElementById('complete'));
+				app.toggle('task');
 				app.init();
 				app.start();
 			}
@@ -174,7 +175,7 @@ var view = {
 			'decreaseTask', 'increaseTask',	
 			'decreaseBreak', 'increaseBreak',
 			'showSettings', 'hideSettings',
-			'apply', 'again'];
+			'apply', 'continue'];
 
 		controls.forEach(function(control) {
 			document.getElementById(control)
