@@ -144,7 +144,6 @@ var view = {
 			start: app.start.bind(app),
 			pause: app.stop.bind(app),
 			reset: app.reset.bind(app),
-			apply: app.reset.bind(app),
 			toggleTask: function() {
 				if(app.resting) {
 					app.next();
@@ -189,8 +188,7 @@ var view = {
 			'increaseNumTasks','decreaseNumTasks',
 			'decreaseTask', 'increaseTask',	
 			'decreaseBreak', 'increaseBreak',
-			'showSettings', 'hideSettings',
-			'apply'];
+			'showSettings', 'hideSettings'];
 
 		controls.forEach(function(control) {
 			document.getElementById(control)
