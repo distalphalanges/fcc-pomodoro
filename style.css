@@ -4,16 +4,14 @@
 
 body {
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 15px;
+    margin: 0;
 }
 
-h2 {
+h2, h3 {
     margin: 0;
     padding: 0;
-}
-
-p {
-    margin: 6px 0;
+    display: inline-block;
 }
 
 a {
@@ -28,6 +26,7 @@ button {
 #container {
     width: 720px;
     margin: 10px auto;
+    display: inline-block;
 }
 
 #timer, #toggle, #control, #settings {
@@ -41,7 +40,7 @@ button {
     margin: 0 auto;
 }
 
-.wide {
+#continue {
     display: block;
     width: 100%;
     padding: 6px;
@@ -78,11 +77,12 @@ button {
 
 #control button {
     width: 120px;
-    padding: 12px;
+    padding: 10px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
     color: #fff;
     font-size: 21px;
     font-weight: bold;
+    border-radius: 3px;
 }
 
 #control button:active {
@@ -117,14 +117,6 @@ button {
     background-color: #ddd;
 }
 
-.active {
-    border: 1px solid #aaa;
-    padding: 2px;
-    background-image: -webkit-linear-gradient(bottom, #f7f7f7, #d1d1d1);
-    background-image: -o-linear-gradient(bottom, #f7f7f7, #d1d1d1);
-    background-image: linear-gradient(to top, #f7f7f7, #d1d1d1);
-}
-
 #select-rhythm select {
     width: 88%;
 }
@@ -135,27 +127,6 @@ button {
     display: inline-block;
     background-color: #eee;
     color: #444;
-}
-
-.length {
-    width: 36%;
-}
-
-.task {
-    width: 24%;
-}
-
-.input, .buttons {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.input {
-    width: 70%;
-}
-
-.buttons {
-    width: 24%;
 }
 
 .adjust label {
@@ -178,6 +149,27 @@ button {
     font-size: 16px;
 }
 
+.length {
+    width: 36%;
+}
+
+.task {
+    width: 24%;
+}
+
+.adjust-input, .adjust-buttons {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.adjust-input {
+    width: 70%;
+}
+
+.adjust-buttons {
+    width: 24%;
+}
+
 .hidden {
-    display: none;
+    display: none !important;
 }

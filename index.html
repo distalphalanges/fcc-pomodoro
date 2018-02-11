@@ -9,10 +9,10 @@
 		<div id="complete" class="hidden">
 			<h2>Session complete.</h2>
 			<p>You've been working for a while. You should probably take a break.</p>
-			<button id="continue" class="wide">No thanks.</button>
+			<button id="continue" onclick="app.continue()">No thanks.</button>
 		</div>
 		<div id="toggle">
-			<button id="toggleTask" class="mode active">Task</button>
+			<button id="toggleTask" class="mode">Task</button>
 			<button id="toggleBreak" class="mode">Break</button>
 			<div id="tasks-completed">
 				<input type="text" id="tasksCompleted" readonly>
@@ -42,30 +42,30 @@
 			</div>
 			<div class="adjust task">
 				<label>Tasks:</label>
-				<div class="input">
+				<div class="adjust-input">
 					<input type="text" id="numTasks" placeholder="&#x221e;">
 				</div>
-				<div class="buttons">
+				<div class="adjust-buttons">
 					<button id="increaseNumTasks">+</button>
 					<button id="decreaseNumTasks">-</button>
 				</div>
 			</div>
 			<div class="adjust length">
 				<label>Task length:</label>
-				<div class="input">
+				<div class="adjust-input">
 					<input type="text" id="taskLength">
 				</div>
-				<div class="buttons">
+				<div class="adjust-buttons">
 					<button id="increaseTask">+</button>
 					<button id="decreaseTask">-</button>
 				</div>
 			</div>
 			<div class="adjust length">
 				<label>Break length:</label>
-				<div class="input">
-					<input type="text" id="breakLength">
+				<div class="adjust-input">
+					<input type="text" id="restLength">
 				</div>
-				<div class="buttons">
+				<div class="adjust-buttons">
 					<button id="increaseBreak">+</button>
 					<button id="decreaseBreak">-</button>
 				</div>
