@@ -26,7 +26,6 @@ button {
 #container {
     width: 720px;
     margin: 10px auto;
-    display: inline-block;
 }
 
 #timer, #toggle, #control, #settings {
